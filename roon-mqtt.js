@@ -365,7 +365,12 @@ function roonOutputFindByName(outputName) {
 function roonZoneJsonChangeOutputs(zoneData) {
     let newOutputs = {};
     for (let index in zoneData["outputs"]) {
-        newOutputs[zoneData["outputs"][index]["display_name"]] = JSON.parse(JSON.stringify(zoneData["outputs"][index]));
+        let output = JSON.parse(JSON.stringify(zoneData["outputs"][index]));
+        let volume = output.volume;
+        if (volume) {
+            output.volume.percent = (volume.value - volume.hard_limit_min) / (volume.hard_limit_max - volume.hard_limit_min) * 100.0;
+        }
+        newOutputs[zoneData["outputs"][index]["display_name"]] = output;
     }
     zoneData["outputs"] = JSON.parse(JSON.stringify(newOutputs));
     return zoneData;
