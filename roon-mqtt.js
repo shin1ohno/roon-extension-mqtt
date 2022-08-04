@@ -33,7 +33,7 @@ function mqttPublishJson(mqttBase, mqttClient, jsonData, retainFlag) {
         }
     } else {
         if (debug) {
-            console.log('*** mqtt_publish_JSON called but unable to publish. mqtt_client=%s', typeof mqttClient !== 'undefined' ? JSON.stringify(mqttClient) : 'undefined');
+            console.log('*** mqtt_publish_JSON called but unable to publish. mqtt_client=%s', typeof mqttClient !== 'undefined' ? mqttClient : 'undefined');
         }
     }
 }
@@ -86,6 +86,7 @@ function mqttGetClient() {
             //mqtt_client.subscribe(mysettings.mqttroot + '/browse');
             mqttClient.subscribe(mySettings.mqttroot + '/+/browse/+');
             mqttClient.subscribe(mySettings.mqttroot + '/+/outputs/+/volume/set');
+            mqttClient.subscribe(mySettings.mqttroot + "/+/outputs/+/volume/set/+");
             mqttClient.subscribe(mySettings.mqttroot + "/+/settings/set/+");
             mqttClient.subscribe(mySettings.mqttroot + "/+/outputs/+/power");
             mqttClient.subscribe(mySettings.mqttroot + '/+/outputs/add');
@@ -130,7 +131,7 @@ function mqttGetClient() {
                         } else {
                             controlOutput(output["output_id"], message, zoneName);
                         }
-                    } else if (topicSplit[2] === 'outputs' && topicSplit[4] === 'volume' && topicSplit[5] === 'set') {
+                    } else if (topicSplit[2] === 'outputs' && topicSplit[4] === 'volume' && topicSplit[5] === "set") {
                         // adjust volume of an output
                         if (debug) {
                             console.log('*** find output id for zone=%s, output=%s', zoneName, topicSplit[3]);
@@ -141,7 +142,19 @@ function mqttGetClient() {
                         } else if (typeof message === 'undefined' || message.toString() === '') {
                             console.log('*** no message for volume set command!');
                         } else {
-                            adjustOutputVolume(output["output_id"], message);
+                            switch (topicSplit[6]) {
+                                case "relative":
+                                    adjustOutputVolume(output["output_id"], message, "relative");
+                                    break;
+                                case "relative_step":
+                                    adjustOutputVolume(output["output_id"], message, "relative_step");
+                                    break;
+                                case "absolute":
+                                    adjustOutputVolume(output["output_id"], message, "absolute");
+                                    break;
+                                default:
+                                    adjustOutputVolume(output["output_id"], message, "absolute");
+                            }
                         }
                     } else if (topicSplit[2] === "outputs" && topicSplit.length === 4) {
                         if (debug) {
@@ -221,13 +234,13 @@ function controlOutput(outputId, message, zoneName) {
     roonCore.services.RoonApiTransport.control(outputId, message.toString());
 }
 
-function adjustOutputVolume(outputId, message) {
+function adjustOutputVolume(outputId, message, how) {
     if (message.toString().toLowerCase() === "mute") {
         roonCore.services.RoonApiTransport.mute(outputId, "mute");
     } else if (message.toString().toLowerCase() === "unmute") {
         roonCore.services.RoonApiTransport.mute(outputId, "unmute");
     } else if (!isNaN(message)) {
-        roonCore.services.RoonApiTransport.change_volume(outputId, "absolute", parseFloat(message.toString()), function () {
+        roonCore.services.RoonApiTransport.change_volume(outputId, how, parseFloat(message.toString()), function () {
             roonCore.services.RoonApiTransport.mute(outputId, "unmute");
         });
     } else if (debug) {
@@ -645,8 +658,12 @@ if (typeof mySettings.tls_rejectUnauthorized === 'undefined') {
     saveDefaultSetting = true;
 }
 
-if (saveDefaultSetting) { roon.save_config("settings", mySettings); }
-if (debug) { console.log('*** starting with Settings=%s', JSON.stringify(mySettings)); }
+if (saveDefaultSetting) {
+    roon.save_config("settings", mySettings);
+}
+if (debug) {
+    console.log('*** starting with Settings=%s', JSON.stringify(mySettings));
+}
 let roonSvcStatus = new RoonApiStatus(roon);
 
 let roonSvcSettings = new RoonApiSettings(roon, {
