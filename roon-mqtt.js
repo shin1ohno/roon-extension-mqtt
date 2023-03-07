@@ -596,6 +596,14 @@ const roon = new RoonApi({
                         let zones = data[zoneEvent];
                         for (let index in zones) {
                             let zoneData = roonZoneJsonChangeOutputs(zones[index]);
+                            let host_url = roonCore.moo.transport.ws.url.match(/ws:\/\/([\d,\.,:]+)\/*/)[1];
+                            zoneData["core"] = {
+                                core_id: roonCore.core_id,
+                                display_name: roonCore.display_name,
+                                display_version: roonCore.display_version,
+                                host_address: host_url.split(":")[0],
+                                host_port: host_url.split(":")[1],
+                            }
                             let zoneName = zoneData.display_name || roonZoneFindById(zoneData.zone_id);
                             if (zoneName) {
                                 if (zoneEvent !== 'zones_seek_changed') {
