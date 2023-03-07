@@ -362,10 +362,11 @@ function roonOutputFindByName(outputName) {
 }
 
 
-function roonZoneJsonChangeOutputs(zoneData) {
+function roonZoneJsonChangeOutputs(zoneData, envData) {
     let newOutputs = {};
     for (let index in zoneData["outputs"]) {
         let output = JSON.parse(JSON.stringify(zoneData["outputs"][index]));
+        output["env"] = JSON.stringify(envData);
         let volume = output.volume;
         if (volume) {
             output.volume.percent = (volume.value - volume.hard_limit_min) / (volume.hard_limit_max - volume.hard_limit_min) * 100.0;
@@ -595,15 +596,18 @@ const roon = new RoonApi({
                     } else {
                         let zones = data[zoneEvent];
                         for (let index in zones) {
-                            let zoneData = roonZoneJsonChangeOutputs(zones[index]);
                             let host_url = roonCore.moo.transport.ws.url.match(/ws:\/\/([\d,\.,:]+)\/*/)[1];
-                            zoneData["core"] = {
+                            const envData = {
                                 core_id: roonCore.core_id,
                                 display_name: roonCore.display_name,
                                 display_version: roonCore.display_version,
                                 host_address: host_url.split(":")[0],
                                 host_port: host_url.split(":")[1],
-                            }
+                                zone_id: zones[index].zone_id,
+                                zone_display_name: zones[index].display_name,
+                                zone_status: zones[index].state,
+                            };
+                            let zoneData = roonZoneJsonChangeOutputs(zones[index], envData);
                             let zoneName = zoneData.display_name || roonZoneFindById(zoneData.zone_id);
                             if (zoneName) {
                                 if (zoneEvent !== 'zones_seek_changed') {
