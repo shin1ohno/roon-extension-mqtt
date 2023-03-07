@@ -366,7 +366,12 @@ function roonZoneJsonChangeOutputs(zoneData, envData) {
     let newOutputs = {};
     for (let index in zoneData["outputs"]) {
         let output = JSON.parse(JSON.stringify(zoneData["outputs"][index]));
-        output["env"] = JSON.stringify(envData);
+        output["env"] = JSON.stringify(Object.assign(
+            envData,
+            {
+                output_id: output.output_id,
+            }
+        ));
         let volume = output.volume;
         if (volume) {
             output.volume.percent = (volume.value - volume.hard_limit_min) / (volume.hard_limit_max - volume.hard_limit_min) * 100.0;
@@ -599,10 +604,10 @@ const roon = new RoonApi({
                             let host_url = roonCore.moo.transport.ws.url.match(/ws:\/\/([\d,\.,:]+)\/*/)[1];
                             const envData = {
                                 core_id: roonCore.core_id,
-                                display_name: roonCore.display_name,
-                                display_version: roonCore.display_version,
-                                host_address: host_url.split(":")[0],
-                                host_port: host_url.split(":")[1],
+                                core_display_name: roonCore.display_name,
+                                core_display_version: roonCore.display_version,
+                                core_address: host_url.split(":")[0],
+                                core_port: host_url.split(":")[1],
                                 zone_id: zones[index].zone_id,
                                 zone_display_name: zones[index].display_name,
                                 zone_status: zones[index].state,
