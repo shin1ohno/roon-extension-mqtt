@@ -1,9 +1,9 @@
 module.exports = {
   apps: [
     {
-      script: '/opt/homebrew/bin/node ./lib/src/index.js',
+      script: '$HOME/.volta/bin/node ./lib/src/roon-mqtt.js',
       watch: '.',
-      name: 'nuimo-mqtt',
+      name: 'roon-extention-mqtt',
       env_production: {
         NODE_ENV: 'production',
         BROKER_URL: 'mqtt://mqbroker.home.local:1883'
@@ -18,11 +18,11 @@ module.exports = {
     production: {
       user: 'shin1ohno',
       host: 'mini.home.local',
-      ref: 'origin/main',
-      repo: 'https://github.com/shin1ohno/nuimo-mqtt.git',
-      path: '/Users/shin1ohno/deploy/nuimo-mqtt-production',
+      ref: 'origin/master',
+      repo: 'https://github.com/shin1ohno/roon-extension-mqtt.git',
+      path: '/Users/shin1ohno/deploy/roon-extension-mqtt-production',
       'post-deploy':
-          '$HOME/.volta/bin/npm install && rm -rf lib && $HOME/.volta/bin/npm run build && /opt/homebrew/bin/pm2 reload ecosystem.config.cjs --env production',
+          'export PATH=$HOME/.volta/bin:$PATH && npm install && rm -rf lib && npm run build && /opt/homebrew/bin/pm2 reload ecosystem.config.cjs --env production',
     },
   },
 }

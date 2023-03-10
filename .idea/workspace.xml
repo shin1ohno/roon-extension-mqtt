@@ -68,7 +68,7 @@
       <workItem from="1660141913559" duration="598000" />
       <workItem from="1678117874591" duration="720000" />
       <workItem from="1678137551740" duration="3325000" />
-      <workItem from="1678413040942" duration="679000" />
+      <workItem from="1678413040942" duration="1551000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor: Update code styling etc. to mitigate IDE warnings and errors">
       <created>1659604921291</created>
@@ -133,7 +133,56 @@
       <option name="project" value="LOCAL" />
       <updated>1678413675135</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Deploy">
+      <created>1678413727367</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1678413727367</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Deploy">
+      <created>1678413736364</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1678413736364</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Deploy">
+      <created>1678413858155</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1678413858155</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Deploy">
+      <created>1678413948505</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1678413948505</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Deploy">
+      <created>1678413976236</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1678413976236</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Deploy">
+      <created>1678414367926</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1678414367926</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Deploy">
+      <created>1678414501125</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1678414501125</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
