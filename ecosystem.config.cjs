@@ -22,7 +22,7 @@ module.exports = {
       repo: 'https://github.com/shin1ohno/roon-extension-mqtt.git',
       path: '/Users/shin1ohno/deploy/roon-extension-mqtt-production',
       'post-deploy':
-          'export PATH=$HOME/.volta/bin:$PATH && npm install && rm -rf lib && npm run build && /opt/homebrew/bin/pm2 reload ecosystem.config.cjs --env production',
+          'export PATH=$HOME/.volta/bin:$PATH && npm install && /opt/homebrew/bin/pm2 reload ecosystem.config.cjs --env production',
     },
   },
 }

@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d820dad-1350-4219-b8e1-d94f02e7927b" name="Changes" comment="Deploy">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecosystem.config.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/ecosystem.config.cjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +67,7 @@
       <workItem from="1660141913559" duration="598000" />
       <workItem from="1678117874591" duration="720000" />
       <workItem from="1678137551740" duration="3325000" />
-      <workItem from="1678413040942" duration="1551000" />
+      <workItem from="1678413040942" duration="1618000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor: Update code styling etc. to mitigate IDE warnings and errors">
       <created>1659604921291</created>
@@ -182,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678414501125</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Deploy">
+      <created>1678414615534</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1678414615534</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
