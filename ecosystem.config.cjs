@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      script: '$HOME/.volta/bin/node ./lib/src/roon-mqtt.js',
+      script: '$HOME/.volta/bin/node .roon-mqtt.js',
       watch: '.',
       name: 'roon-extention-mqtt',
       env_production: {
