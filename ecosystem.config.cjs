@@ -16,11 +16,11 @@ module.exports = {
   ],
   deploy: {
     production: {
-      user: 'shin1ohno',
-      host: 'mini.home.local',
+      user: 'root',
+      host: 'debmini.home.local',
       ref: 'origin/master',
       repo: 'https://github.com/shin1ohno/roon-extension-mqtt.git',
-      path: '/Users/shin1ohno/deploy/roon-extension-mqtt-production',
+      path: '/root/deploy/roon-extension-mqtt-production',
       'post-deploy':
           'export PATH=$HOME/.volta/bin:$PATH && npm install && pm2 reload ecosystem.config.cjs --env production',
     },
